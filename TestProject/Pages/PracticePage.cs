@@ -11,6 +11,7 @@ public class PracticePage : IPracticePage
     private readonly IWebDriver _driver;
     private DriverWait driverWait;
     private ActionHelpers actionHelpers;
+    public CheckoutPage checkoutPage;
 
     // Constructor: Assigns WebDriver instance
     public PracticePage(IWebDriver driver)
@@ -18,6 +19,7 @@ public class PracticePage : IPracticePage
         _driver = driver;
         driverWait = new DriverWait(driver);
         actionHelpers = new ActionHelpers(driver);
+        checkoutPage = new CheckoutPage(driver);
         PageFactory.InitElements(driver, this); //Page Object Factory, outdated and not really used anymore
     }
 
@@ -34,9 +36,6 @@ public class PracticePage : IPracticePage
     private IWebElement ShoppingCart => _driver.FindElement(By.CssSelector("[class*='fa-shopping-cart']"));
     private IWebElement CartTable => _driver.FindElement(By.Id("cart_info_table"));
     private IWebElement CheckoutButton => _driver.FindElement(By.CssSelector(".btn-success"));
-    private IWebElement CountryField => _driver.FindElement(By.Id("country"));
-    private IWebElement TermsConditionsCheckbox => _driver.FindElement(By.CssSelector("label[for*='checkbox2']"));
-    private IWebElement PurchaseButton => _driver.FindElement(By.CssSelector("[value='Purchase']"));
     private IWebElement SuccessAlert => _driver.FindElement(By.CssSelector("[class*='alert-success']"));
     #endregion
 
@@ -115,27 +114,6 @@ public class PracticePage : IPracticePage
     public void ClickCheckoutButton()
     {
         CheckoutButton.Click();
-    }
-
-    public void EnterCountry(string country)
-    {
-        CountryField.SendKeys(country);
-    }
-
-    public void ClickOnCountrySuggestion(string country)
-    {
-        driverWait.WaitUntilElementIsVisibleUsingLinkText(country);
-        _driver.FindElement(By.LinkText(country)).Click();
-    }
-
-    public void TickTermsAndConditionsCheckbox()
-    {
-        TermsConditionsCheckbox.Click();
-    }
-
-    public void ClickPurchaseButton()
-    {
-        PurchaseButton.Click();
     }
 
     public void OpenInterviewLinkInNewTab() // stimulate CTRL + click

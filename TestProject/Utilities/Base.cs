@@ -75,8 +75,14 @@ namespace TestProject.Utilities
 
                 case "Edge":
 
-                    new WebDriverManager.DriverManager().SetUpDriver(new EdgeConfig());
-                    driver = new EdgeDriver();
+                    //new WebDriverManager.DriverManager().SetUpDriver(new EdgeConfig());
+                    //driver = new EdgeDriver();
+
+                    var driverPath = @"C:\Drivers\EdgeDriver\";
+                    var service = EdgeDriverService.CreateDefaultService(driverPath);
+                    var options = new EdgeOptions();
+
+                    driver = new EdgeDriver(service, options);
                     break;
             }
 

@@ -8,14 +8,14 @@ namespace TestProject.Tests.RahulAcademy
     [TestFixture]
     public class End2EndTest : Base
     {
-        public PracticePage practicePage;
-        public LoginPage loginPage;
+        public PracticePage _practicePage;
+        public LoginPage _loginPage;
 
         [SetUp]
         public void PageObjects()
         {
-            practicePage = new PracticePage(driver);
-            loginPage = new LoginPage(driver);
+            _practicePage = new PracticePage(driver);
+            _loginPage = new LoginPage(driver);
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace TestProject.Tests.RahulAcademy
             String[] expectedProducts = { "iphone X", "Blackberry" };
             String[] actualProducts = new string[2]; // empty string array
 
-            loginPage.SuccessfulLogin(username, password);
+            _loginPage.SuccessfulLogin(username, password);
 
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(8));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.PartialLinkText("Checkout")));
@@ -60,13 +60,13 @@ namespace TestProject.Tests.RahulAcademy
             Thread.Sleep(1000);
             expectedProducts.Should().Equal(actualProducts);
 
-            practicePage.ClickCheckoutButton();
-            practicePage.EnterCountry("Ind");
-            practicePage.ClickOnCountrySuggestion("India");
-            practicePage.TickTermsAndConditionsCheckbox();
-            practicePage.ClickPurchaseButton();
+            _practicePage.ClickCheckoutButton();
+            _practicePage.checkoutPage.EnterCountry("Ind");
+            _practicePage.checkoutPage.ClickOnCountrySuggestion("India");
+            _practicePage.checkoutPage.TickTermsAndConditionsCheckbox();
+            _practicePage.checkoutPage.ClickPurchaseButton();
 
-            practicePage.SuccessFulPaymentText.Should().Contain("Success! Thank you!");
+            _practicePage.SuccessFulPaymentText.Should().Contain("Success! Thank you!");
         }
 
 

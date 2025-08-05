@@ -13,15 +13,11 @@
     void ClickConfirmName();
     void ClickContinueShoppingButton();
     void ClickNewTabButton();
-    void ClickOnCountrySuggestion(string country);
-    void ClickPurchaseButton();
     void ClickShoppingCart();
-    void EnterCountry(string country);
     void EnterFirstThreeCharactersOfCountry_AutoSuggestive(string country);
     void HoverOnMouseHoverButton();
     void InputName(string name);
     void OpenInterviewLinkInNewTab();
     void ScrollToMouseHoverButton();
     void ScrollToRahulFrame();
-    void TickTermsAndConditionsCheckbox();
 }
