@@ -4,6 +4,8 @@ This repository contains automated test scripts written in C# using the NUnit fr
 The tests are designed to practice and improve my skills in test automation, focusing on Page Object Model and cross-browser compatibility.
 Created by Daniel Pap - https://github.com/danielpap99 - https://www.linkedin.com/in/danielpap1999/
 
+Please note: You might have to download and place EdgeDriver somewhere local first.
+
 ## Technologies Used
 
 - **C#** – Programming language
