@@ -19,7 +19,7 @@ namespace TestProject.Tests.RahulAcademy
         }
 
         [Test]
-        [TestCaseSource(("LoginTestCasesFromJson"))] // global test cases for username and password
+        [TestCaseSource(("ValidLoginDataFromJson"))] // global test cases for username and password
         [Category("Regression")]
         [Category("Team 3")]
         public void EndToEndFlow(string username, string password) //uses arrays to make sure correct products are added to card
@@ -48,7 +48,7 @@ namespace TestProject.Tests.RahulAcademy
 
             }
             Thread.Sleep(1000);
-            driver.FindElement(By.PartialLinkText("Checkout")).Click();
+            _practicePage.ClickCheckout();
             IList<IWebElement> checkoutCards = driver.FindElements(By.CssSelector("h4 a"));
 
             for (int i = 0; i < 2; i++)
@@ -78,9 +78,13 @@ namespace TestProject.Tests.RahulAcademy
             yield return new TestCaseData("rahulshettyacademy123", "learning123");
         }
 
-        public static IEnumerable<TestCaseData> LoginTestCasesFromJson() //test cases parsed from json file
+        public static IEnumerable<TestCaseData> ValidLoginDataFromJson() //test cases parsed from json file
         {
             yield return new TestCaseData(getDataParser().extractData("username"), getDataParser().extractData("password"));
+        }
+
+        public static IEnumerable<TestCaseData> InvalidLoginDataFromJson() //test cases parsed from json file
+        {
             yield return new TestCaseData(getDataParser().extractData("wrong_username"), getDataParser().extractData("wrong_password"));
         }
 

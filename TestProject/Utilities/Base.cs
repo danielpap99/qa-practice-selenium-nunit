@@ -167,9 +167,9 @@ namespace TestProject.Utilities
                 test.Log(Status.Fail, "Test failed with stacktrace " + stackTrace);
             }
 
-            extent!.Flush();
             driver.Quit();
             driver.Dispose();
+            extent!.Flush();
         }
     }
 }

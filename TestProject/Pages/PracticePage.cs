@@ -36,6 +36,7 @@ public class PracticePage : IPracticePage
     private IWebElement ShoppingCart => _driver.FindElement(By.CssSelector("[class*='fa-shopping-cart']"));
     private IWebElement CartTable => _driver.FindElement(By.Id("cart_info_table"));
     private IWebElement CheckoutButton => _driver.FindElement(By.CssSelector(".btn-success"));
+    private IWebElement Checkout => _driver.FindElement(By.PartialLinkText("Checkout"));
     private IWebElement SuccessAlert => _driver.FindElement(By.CssSelector("[class*='alert-success']"));
     #endregion
 
@@ -53,6 +54,11 @@ public class PracticePage : IPracticePage
     {
         NameField.SendKeys(name);
         //nameInputField!.SendKeys(name);
+    }
+
+    public void ClickCheckout()
+    {
+        Checkout.Click();
     }
 
     public void ClickConfirmName()
@@ -140,8 +146,8 @@ public class PracticePage : IPracticePage
     #region Asserts
 
     public string CountryFieldText => AutoSuggestiveCountryDropdown.GetAttribute("value")!;
-
     public bool PhotoSlideComponentVisible => PhotoSlideComponent.Displayed;
+    public bool CheckoutVisible => Checkout.Displayed;
 
     #endregion
 }

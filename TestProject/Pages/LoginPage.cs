@@ -19,6 +19,7 @@ public class LoginPage : ILoginPage
     private IWebElement LoginButton => _driver.FindElement(By.CssSelector("[data-testid='btn-login']"));
     private IWebElement VerifyButton => _driver.FindElement(By.CssSelector("[data-testid='btn-code']"));
     private IWebElement LoginComponent => _driver.FindElement(By.Id("otp-login"));
+    private IWebElement LoginForm => _driver.FindElement(By.Id("login-form"));
     private IWebElement RememberMeCheckboxByXpath => _driver.FindElement(By.XPath("//html/body/main/div/div[1]/div/div[1]/label[2]/input[@type='checkbox']"));
     private IWebElement OtpButton(int number) => _driver.FindElement(By.CssSelector($"[data-testid='otp-input-{number}']"));
     private IWebElement InvalidCodeMessage => _driver.FindElement(By.CssSelector(".col-12 uni-mt-16 flex-align-items-center ur4-L tOteG OlBRA"));
@@ -26,6 +27,7 @@ public class LoginPage : ILoginPage
     private IWebElement PasswordField => _driver.FindElement(By.Name("password"));
     private IWebElement TAndCTickbox => _driver.FindElement(By.XPath("//div[@class='form-group'][5]/label/span/input"));
     private IWebElement SignInButton => _driver.FindElement(By.XPath("//input[@value='Sign In']"));
+    private IWebElement SignIn => _driver.FindElement(By.Id("signInBtn"));
 
     #region Methods
 
@@ -35,6 +37,16 @@ public class LoginPage : ILoginPage
         PasswordField.SendKeys(password);
         TAndCTickbox.Click();
         SignInButton.Click();
+        driverWait.WaitUntilElementIsNotVisibleUsingID("signInBtn");
+    }
+
+    public void UnsuccessfulLogin(string username, string password)
+    {
+        UsernameField.SendKeys(username);
+        PasswordField.SendKeys(password);
+        TAndCTickbox.Click();
+        SignInButton.Click();
+        Thread.SpinWait(1000);
     }
 
     public void EnterEmail(string email)
@@ -80,7 +92,7 @@ public class LoginPage : ILoginPage
     #region Asserts
     public string InvalidCodeMessageText => InvalidCodeMessage.Text;
     public string LoginComponentText => LoginComponent.Text;
-
+    public string LoginFormText => LoginForm.GetAttribute("textContent")!;
     public bool IsVerifyButtonDisplayed() => VerifyButton.Displayed;
     #endregion
 }

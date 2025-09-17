@@ -6,9 +6,11 @@
     string CartProductCount { get; }
     string CartContentText { get; }
     string SuccessFulPaymentText { get; }
+    bool CheckoutVisible { get; }
 
     void AcceptJavaAlert();
     void CancelJavaAlert();
+    void ClickCheckout();
     void ClickCheckoutButton();
     void ClickConfirmName();
     void ClickContinueShoppingButton();
